@@ -1,5 +1,5 @@
 const GUMROAD_PRODUCT_URL = "https://gumroad.com/l/your-product";
-const VERIFY_API_ENDPOINT = "";
+const VERIFY_API_ENDPOINT = "https://your-vercel-project.vercel.app/api/verify-license";
 const MOCK_PRO_KEY = "TEST-PRO-123";
 
 const planStatusEl = document.getElementById("planStatus");
@@ -74,6 +74,7 @@ async function verifyLicenseKey(key) {
   }
 
   if (!VERIFY_API_ENDPOINT) {
+    setMessage("Verification API is not configured.", true);
     return false;
   }
 
