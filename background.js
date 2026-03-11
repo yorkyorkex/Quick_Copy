@@ -19,6 +19,9 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     return;
   }
 
+  const { isPro = false } = await chrome.storage.local.get({ isPro: false });
+  const textToCopy = isPro ? formatProText(selectedText) : selectedText;
+
   try {
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
@@ -37,14 +40,21 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
           textarea.remove();
         }
       },
-      args: [selectedText]
+      args: [textToCopy]
     });
 
-    await showToast(tab.id, "Copied to clipboard");
+    await showToast(tab.id, isPro ? "Copied with Pro formatting" : "Copied to clipboard");
   } catch (error) {
     console.error("Quick Copy failed:", error);
   }
 });
+
+function formatProText(text) {
+  return text
+    .replace(/\r?\n+/g, " ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
 
 async function showToast(tabId, message) {
   try {

@@ -8,7 +8,7 @@
       body {
         margin: 0;
         padding: 14px;
-        min-width: 240px;
+        min-width: 300px;
         font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
         background: #f8fafc;
         color: #0f172a;
@@ -25,17 +25,132 @@
         font-size: 13px;
       }
 
+      .card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px;
+        margin-top: 12px;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .status {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      .status.free {
+        background: #e2e8f0;
+        color: #334155;
+      }
+
+      .status.pro {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 8px;
+        padding: 9px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      #activateBtn {
+        background: #0f172a;
+        color: #ffffff;
+      }
+
+      #upgradeBtn {
+        background: #2563eb;
+        color: #ffffff;
+      }
+
       .hint {
         margin-top: 10px;
         padding: 8px 10px;
         background: #e2e8f0;
         border-radius: 8px;
       }
+
+      #message {
+        min-height: 18px;
+        margin-top: 8px;
+        font-size: 12px;
+        color: #334155;
+      }
+
+      ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+        font-size: 12px;
+      }
+
+      li {
+        margin-top: 4px;
+      }
     </style>
   </head>
   <body>
     <h1>Quick Copy</h1>
     <p>Select text on any page, right-click, then choose <strong>Quick Copy</strong>.</p>
-    <p class="hint">The selected text is copied instantly and a small toast confirms it.</p>
+
+    <div class="card">
+      <div class="row">
+        <strong>Plan Status</strong>
+        <span id="planStatus" class="status free">Free</span>
+      </div>
+      <div class="hint">Free: basic copy only. Pro: improved formatting before copy.</div>
+      <ul>
+        <li>Remove line breaks</li>
+        <li>Remove extra spaces</li>
+        <li>Better copy formatting</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <label for="licenseKey">License Key</label>
+      <input id="licenseKey" type="text" placeholder="Enter your Gumroad license key" autocomplete="off" />
+      <div class="actions">
+        <button id="activateBtn" type="button">Activate</button>
+        <button id="upgradeBtn" type="button">Upgrade to Pro</button>
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+    </div>
+
+    <script src="popup.js"></script>
   </body>
 </html>

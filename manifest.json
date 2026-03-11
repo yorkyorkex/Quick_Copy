@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "Quick Copy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Copy selected text instantly from the right-click menu.",
-  "permissions": ["contextMenus", "scripting", "activeTab"],
+  "permissions": ["contextMenus", "scripting", "activeTab", "storage"],
   "background": {
     "service_worker": "background.js"
   },
